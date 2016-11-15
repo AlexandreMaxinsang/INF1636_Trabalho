@@ -8,8 +8,6 @@ import java.net.URL;
 import java.io.*;
 import javax.sound.sampled.*;
 
-
-
 public class BattleshipGUI extends JFrame{
 
 	//GUI recorded information
@@ -79,11 +77,7 @@ public class BattleshipGUI extends JFrame{
     String [] colorList = {"Default", "Black", "Blue", "Green", "Orange", "Pink", "White", "Yellow"};
     private JComboBox colorDrop = new JComboBox(colorList);
 	
-	//Join IP frame popup
-	private JFrame ipPopUp = new JFrame();
-	private JLabel ipRequest = new JLabel("Please input the IP address you wish to join.", JLabel.CENTER);
-	private JTextField ipField = new JTextField();
-	private JLabel ipMessage = new JLabel("Hit enter to submit.", JLabel.CENTER);
+	
 	
     //Play again popup
     private JFrame playAgainPopUp = new JFrame();
@@ -94,9 +88,6 @@ public class BattleshipGUI extends JFrame{
     //Game board component
     private GameGrid board = new GameGrid();
 
-    //Audio muted/unmuted checkbox
-    private JPanel audioPanel = new JPanel();
-    private JCheckBox audioMute = new JCheckBox("Mute");
 
     /**
      * Default constructor for the class. Sets everything up.
@@ -109,7 +100,7 @@ public class BattleshipGUI extends JFrame{
         this.getContentPane().add(BorderLayout.NORTH,title);
 
         //Add game board
-        this.board.setSize(100,210);
+        this.board.setSize(1000,210);
         this.board.addMouseListener(this.new cellClick());
         this.board.addMouseMotionListener(this.new mouseMove());
         this.board.addKeyListener(this.new changeOrientation());
@@ -122,72 +113,11 @@ public class BattleshipGUI extends JFrame{
         this.getContentPane().add(BorderLayout.SOUTH, messages);
 
         this.pack(); // For some reason this code is necessary to give the board focus
-        this.setSize(350,500);
+        this.setSize(900,900);
         this.board.requestFocusInWindow();
 
-        //setup difficulty options popup
-        GridLayout threeButtonGrid = new GridLayout(1,3);
-        this.diffPopUp.setLayout(threeButtonGrid);
-        this.diffPopUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.diffPopUp.setSize(600,100);
-
-        //Add difficulty buttons listeners
-        this.easyButton.addActionListener(this.new difficultyClick());
-        this.mediumButton.addActionListener(this.new difficultyClick());
-        this.hardButton.addActionListener(this.new difficultyClick());
-
-        this.diffPopUp.add(easyButton);
-        this.diffPopUp.add(mediumButton);
-        this.diffPopUp.add(hardButton);
-
-        //Setup gametype popup
-        this.typePopUp.setLayout(threeButtonGrid);
-        this.typePopUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.typePopUp.setSize(800,100);
-
-        //Add type buttons listeners
-        this.hostButton.addActionListener(this.new typeClick());
-        this.joinButton.addActionListener(this.new typeClick());
-        this.computerButton.addActionListener(this.new typeClick());
-
-        //Add type buttons to window
-        this.typePopUp.add(hostButton);
-        this.typePopUp.add(joinButton);
-        this.typePopUp.add(computerButton);
-
-        //Setup playAgain popup
-        this.playAgainPopUp.setLayout(threeButtonGrid);
-        this.playAgainPopUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.playAgainPopUp.setSize(800,100);
-        
-        //Add playAgain button listeners
-        this.playAgainButton.addActionListener(this.new playAgainClick());
-        this.newShipsButton.addActionListener(this.new playAgainClick());
-        this.mainMenuButton.addActionListener(this.new playAgainClick());
-
-        //Add playAgain buttons to window
-        this.playAgainPopUp.add(playAgainButton);
-        this.playAgainPopUp.add(newShipsButton);
-        this.playAgainPopUp.add(mainMenuButton);
-        
-        //Setup shipsize popup
-        this.shipSizePopUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.shipSizePopUp.setSize(600,100);
-
        
-        //Setup colorPopUp
-        this.colorPopUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.colorPopUp.setSize(600,100);
-        
-        //Add shipColor buttons and dropdown listeners
-        this.colorSelectButton.addActionListener(this.new colorClick());
-        this.colorDrop.addActionListener(this.new colorDropSelect());
-
-        //Add buttons and dropdown to window
-        this.colorPopUp.getContentPane().add(BorderLayout.CENTER, colorDrop);
-        this.colorPopUp.getContentPane().add(BorderLayout.SOUTH, colorSelectButton);
-
-     
+    
         
        
     }
@@ -200,7 +130,6 @@ public class BattleshipGUI extends JFrame{
 
           
             BattleshipGUI gui = new BattleshipGUI();
-            gui.setOptions();
             gui.setVisible(true);
 
             
@@ -387,24 +316,8 @@ public class BattleshipGUI extends JFrame{
 		return this.messages.getText();
 	}
 	
-	/**
-	 * Returns the IP address that should be stored in ipField
-	 * @return the IP address stored in ipField
-	 **/
-	 
-	public String getIP(){
-		return this.ipField.getText();
-	}
-	
-	/**
-	 * Find out whether or not an IP address has been entered
-	 * @return state of IP address entry
-	 **/
-	
-	public boolean getIPEntered(){
-		return this.ipEntered;
-	}
-	
+
+
 	/**
 	 * Method for returning status of user prompt
 	 * @return true for the uses acknowledged prompt, false for user hasn't acknowledged prompt
@@ -605,57 +518,7 @@ public class BattleshipGUI extends JFrame{
 
     }
 
-    /**
-	 * Listener for difficulty option buttons
-	 **/
-	
-    public class difficultyClick implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            if( e.getSource() == BattleshipGUI.this.easyButton){
-                difficulty = "EASY";
-                BattleshipGUI.this.diffPopUp.setVisible(false);
-                BattleshipGUI.this.setVisible(true);
-            }
-            else if( e.getSource() == BattleshipGUI.this.mediumButton){
-                difficulty = "MEDIUM";
-                BattleshipGUI.this.diffPopUp.setVisible(false);
-                BattleshipGUI.this.setVisible(true);
-            }
-            else if ( e.getSource() == BattleshipGUI.this.hardButton){
-                difficulty = "HARD";
-                BattleshipGUI.this.diffPopUp.setVisible(false);
-                BattleshipGUI.this.setVisible(true);
-            }
-        }
-    }
-	
-	/**
-	 * Listener for the type options buttons
-	 **/
-	 
-    public class typeClick implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			if( e.getSource() == BattleshipGUI.this.hostButton){
-                gameType = 1;
-                difficulty = "INTERNET";
-                BattleshipGUI.this.typePopUp.setVisible(false);
-                BattleshipGUI.this.setVisible(true);
-            }
-            else if( e.getSource() == BattleshipGUI.this.joinButton){
-                gameType = 2;
-                difficulty = "INTERNET";
-                BattleshipGUI.this.typePopUp.setVisible(false);
-                BattleshipGUI.this.ipPopUp.setVisible(true);
-            }
-            else if ( e.getSource() == BattleshipGUI.this.computerButton){
-                gameType = 3;
-                BattleshipGUI.this.typePopUp.setVisible(false);
-                BattleshipGUI.this.colorPopUp.setVisible(true);
-			}
-		}
-	}
 
-	
 
     /**
     * Listener for the mute check box
@@ -761,18 +624,7 @@ public class BattleshipGUI extends JFrame{
 		return true;
 	}
 	
-	/**
-	 * Listener class for entering IP addresses
-	 **/
-	
-	public class ipEnter implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			ipEntered = true;
-			BattleshipGUI.this.ipPopUp.setVisible(false);
-			BattleshipGUI.this.setVisible(true);
-		}
-	}
-	
+
 	/**
 	 * Mouse listener for clicking on game cells
 	 **/
