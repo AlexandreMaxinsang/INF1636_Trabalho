@@ -5,9 +5,9 @@ public class Game {
 	Ship selected;
 	Ship Board1[][];
 	Ship Board2[][];
-	Tela tela;
+	TelaEscolha tela;
 	
-	Game(Tela tela){
+	Game(TelaEscolha tela){
 		Board1 = new Ship[15][15];
 		Board2 = new Ship[15][15];
 		this.tela= tela;

@@ -3,7 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 
 public class Quad implements Entity {
 	int x, y, w, h;

@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Tela extends JPanel implements MouseListener {
+public class TelaEscolha extends JPanel implements MouseListener {
+	
 	ArrayList<Entity> objs;
-	public Tela() {
+	public TelaEscolha() {
         setBackground(Color.WHITE);
         objs = new ArrayList<Entity>();
         Game game = new Game(this);
