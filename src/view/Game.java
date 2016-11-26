@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.Color;
-
 public class Game {
 	
 	Ship selected;
@@ -45,9 +43,15 @@ public class Game {
 			boolean ok = true;
 			
 			for(int i=0;i<p.length;i++){
-				if(!isWater(player,a+ p[i].x,b+p[i].y)){
-					ok = false;
+				int px=a+p[i].x;
+				int py=b+p[i].y;
+				if(px>=0 && px<15 && py>=0 && py<15)
+				{	if(!isWater(player,px,py)){
+						ok = false;
+					}
 				}
+				else
+					ok=false;
 			}
 			
 			System.out.println(ok);
@@ -55,7 +59,7 @@ public class Game {
 			if(ok){
 				
 				setship(ship,p,player,a,b);
-				ship.selecionado=false;
+				Ship.selecionado=false;
 				setselected(null);
 			}
 		};

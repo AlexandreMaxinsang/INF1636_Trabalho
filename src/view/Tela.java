@@ -16,13 +16,31 @@ public class Tela extends JPanel implements MouseListener {
         setBackground(Color.WHITE);
         objs = new ArrayList<Entity>();
         Game game = new Game(this);
+        
+           
+  
         objs.add(new Submarine(game,10,10,20,20));
         objs.add(new Submarine(game,40,10,20,20));
         objs.add(new Submarine(game,70,10,20,20));
         objs.add(new Submarine(game,100,10,20,20));
+        
         objs.add(new Destroyer(game,10,40,20,20));
-
-        objs.add(new Tabuleiro(game,15,15,50,200,20));
+        objs.add(new Destroyer(game,70,40,20,20));
+        objs.add(new Destroyer(game,130,40,20,20));
+        
+        objs.add(new Cruzadores(game,10,70,20,20));
+        objs.add(new Cruzadores(game,120,70,20,20));
+        
+        objs.add(new Battleships(game,10,100,20,20));
+        
+        
+        objs.add(new Hidroaviao(game,30,130,20,20));
+        objs.add(new Hidroaviao(game,110,130,20,20));
+        objs.add(new Hidroaviao(game,190,130,20,20));
+        objs.add(new Hidroaviao(game,270,130,20,20));
+        objs.add(new Hidroaviao(game,350,130,20,20));
+        
+        objs.add(new Tabuleiro(game,15,15,450,200,20));
 
         addMouseListener(this);
     }
