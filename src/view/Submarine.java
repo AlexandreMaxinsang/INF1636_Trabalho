@@ -9,7 +9,7 @@ public class Submarine extends Ship {
 	
 	boolean used;
 	
-	Submarine(Game game, int x,int  y, int w,int  h){
+	Submarine(Game game, int x,int  y, int w,int  h,Orientacao orientacao){
 		color = Color.GREEN;
 		q = new Quad(x, y, w, h,color);
 		this.game = game;

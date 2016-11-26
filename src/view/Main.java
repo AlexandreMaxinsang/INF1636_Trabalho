@@ -10,7 +10,7 @@ public class Main extends JFrame{
 
 	TelaEscolha telaInicialPlayer1 = new TelaEscolha("Player1");
 	TelaEscolha telaInicialPlayer2 = new TelaEscolha("Player2");
-	
+
 	Main(){
 		
         this.add(telaInicialPlayer1);

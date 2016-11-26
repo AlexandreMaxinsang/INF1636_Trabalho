@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class TelaEscolha extends JPanel implements MouseListener {
 	
@@ -24,26 +25,26 @@ public class TelaEscolha extends JPanel implements MouseListener {
         setBackground(Color.WHITE);
         objs = new ArrayList<Entity>();
       
-        objs.add(new Submarine(game,10,10,20,20));
-        objs.add(new Submarine(game,40,10,20,20));
-        objs.add(new Submarine(game,70,10,20,20));
-        objs.add(new Submarine(game,100,10,20,20));
+        objs.add(new Submarine(game,10,10,20,20,Orientacao.Leste));
+        objs.add(new Submarine(game,40,10,20,20,Orientacao.Leste));
+        objs.add(new Submarine(game,70,10,20,20,Orientacao.Leste));
+        objs.add(new Submarine(game,100,10,20,20,Orientacao.Leste));
         
-        objs.add(new Destroyer(game,10,40,20,20));
-        objs.add(new Destroyer(game,70,40,20,20));
-        objs.add(new Destroyer(game,130,40,20,20));
+        objs.add(new Destroyer(game,10,40,20,20,Orientacao.Leste));
+        objs.add(new Destroyer(game,70,40,20,20,Orientacao.Leste));
+        objs.add(new Destroyer(game,130,40,20,20,Orientacao.Leste));
         
-        objs.add(new Cruzadores(game,10,70,20,20));
-        objs.add(new Cruzadores(game,120,70,20,20));
+        objs.add(new Cruzadores(game,10,70,20,20,Orientacao.Leste));
+        objs.add(new Cruzadores(game,120,70,20,20,Orientacao.Leste));
         
-        objs.add(new Battleships(game,10,100,20,20));
+        objs.add(new Battleships(game,10,100,20,20,Orientacao.Leste));
         
         
-        objs.add(new Hidroaviao(game,30,130,20,20));
-        objs.add(new Hidroaviao(game,110,130,20,20));
-        objs.add(new Hidroaviao(game,190,130,20,20));
-        objs.add(new Hidroaviao(game,270,130,20,20));
-        objs.add(new Hidroaviao(game,350,130,20,20));
+        objs.add(new Hidroaviao(game,10,160,20,20,Orientacao.Leste));
+        objs.add(new Hidroaviao(game,90,160,20,20,Orientacao.Leste));
+        objs.add(new Hidroaviao(game,170,160,20,20,Orientacao.Leste));
+        objs.add(new Hidroaviao(game,250,160,20,20,Orientacao.Leste));
+        objs.add(new Hidroaviao(game,330,160,20,20,Orientacao.Leste));
         
         objs.add(new Tabuleiro(game,15,15,450,200,20));
         
@@ -100,14 +101,20 @@ public class TelaEscolha extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		 for(int i=0;i<objs.size();i++){
-			 if (objs.get(i).onclick(arg0)){
-					repaint();
-				};
-	     }
+		if(SwingUtilities.isRightMouseButton(e) && Ship.selecionado==true)
+		{
+			game.changeOrientation(game.getselected());
+		}
+		if(SwingUtilities.isLeftMouseButton(e))
+		{
+			 for(int i=0;i<objs.size();i++){
+				 if (objs.get(i).onclick(e)){
+						repaint();
+					}
+		     }
+		}
 	}
 
 	@Override

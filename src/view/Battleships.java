@@ -12,13 +12,14 @@ public class Battleships extends Ship {
 	Quad q4;
 	Quad q5;
 	
-	Battleships(Game game, int x,int  y, int w,int  h){
+	Battleships(Game game, int x,int  y, int w,int  h,Orientacao orientacao){
 		color = Color.orange;
 		q1 = new Quad(x, y, w, h,color);
 		q2 = new Quad(x+w, y, w, h,color);
 		q3 = new Quad(x+2*w, y, w, h,color);
 		q4 = new Quad(x+3*w, y, w, h,color);
 		q5 = new Quad(x+4*w, y, w, h,color);
+		this.orientacao=orientacao;
 		this.game = game;
 		used = false;
 	}
@@ -56,10 +57,31 @@ public class Battleships extends Ship {
 	public Point[] requirements() {
 		Point[] p = new Point[5];
 		p[0] = new Point(0,0,super.color);
-		p[1] = new Point(+1,0,super.color);
-		p[2] = new Point(+2,0,super.color);
-		p[3] = new Point(+3,0,super.color);
-		p[4] = new Point(+4,0,super.color);
+		
+		if(orientacao==Orientacao.Norte){
+			p[1] = new Point(0,-1,super.color);
+			p[2] = new Point(0,-2,super.color);
+			p[3] = new Point(0,-3,super.color);
+			p[4] = new Point(0,-4,super.color);
+		}
+		else if(orientacao==Orientacao.Leste){
+			p[1] = new Point(+1,0,super.color);
+			p[2] = new Point(+2,0,super.color);
+			p[3] = new Point(+3,0,super.color);
+			p[4] = new Point(+4,0,super.color);
+		}
+		else if(orientacao==Orientacao.Sul){
+			p[1] = new Point(0,+1,super.color);
+			p[2] = new Point(0,+2,super.color);
+			p[3] = new Point(0,+3,super.color);
+			p[4] = new Point(0,+4,super.color);
+		}
+		else if(orientacao==Orientacao.Oeste){
+			p[1] = new Point(-1,0,super.color);
+			p[2] = new Point(-2,0,super.color);
+			p[3] = new Point(-3,0,super.color);
+			p[4] = new Point(-4,0,super.color);
+		}
 		return p;
 	}
 	@Override

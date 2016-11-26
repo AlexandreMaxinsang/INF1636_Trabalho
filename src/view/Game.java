@@ -77,6 +77,18 @@ public class Game {
 		
 	}
 	
+	public void changeOrientation(Ship s){
+		
+		if(s.orientacao==Orientacao.Norte)
+			s.orientacao=Orientacao.Leste;
+		else if(s.orientacao==Orientacao.Leste)
+			s.orientacao=Orientacao.Sul;
+		else if(s.orientacao==Orientacao.Sul)
+			s.orientacao=Orientacao.Oeste;
+		else if(s.orientacao==Orientacao.Oeste)
+			s.orientacao=Orientacao.Norte;
+		
+	}
 	
 	public int getnumeroShip(){
 		

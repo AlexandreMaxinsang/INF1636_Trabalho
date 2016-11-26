@@ -8,6 +8,7 @@ public abstract class Ship implements Entity {
 	static boolean selecionado=false;
 	Quad q;
 	Color color;
+	protected Orientacao orientacao;
 	
 	public abstract Point[] requirements();
 	public abstract Color getColor();

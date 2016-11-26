@@ -12,13 +12,14 @@ public class Hidroaviao extends Ship{
 	Quad q3;
 
 	
-	Hidroaviao(Game game, int x,int  y, int w,int  h){
+	Hidroaviao(Game game, int x,int  y, int w,int  h,Orientacao orientacao){
 		color = Color.yellow;
+		
 		q1 = new Quad(x, y, w, h,color);
-		q2 = new Quad(x-w, y+w, w, h,color);
+		q2 = new Quad(x+w, y-w, w, h,color);
 		q3 = new Quad(x+w, y+w, w, h,color);
 
-		
+		this.orientacao=orientacao;
 		this.game = game;
 		used = false;
 	}
@@ -49,11 +50,26 @@ public class Hidroaviao extends Ship{
 	}
 	
 	public Point[] requirements() {
-		Point[] p = new Point[4];
+		Point[] p = new Point[3];
 		p[0] = new Point(0,0,super.color);
-		p[1] = new Point(-1,+1,super.color);
-		p[2] = new Point(+1,+1,super.color);
-		p[3] = new Point(0,+1,Color.BLUE);
+		if(orientacao==Orientacao.Norte){
+			p[1] = new Point(-1,-1,super.color);
+			p[2] = new Point(+1,-1,super.color);
+			
+		}
+		else if(orientacao==Orientacao.Leste){
+			p[1] = new Point(+1,-1,super.color);
+			p[2] = new Point(+1,+1,super.color);
+		
+		}
+		else if(orientacao==Orientacao.Sul){
+			p[1] = new Point(-1,+1,super.color);
+			p[2] = new Point(+1,+1,super.color);
+		}
+		else if(orientacao==Orientacao.Oeste){
+			p[1] = new Point(-1,+1,super.color);
+			p[2] = new Point(-1,-1,super.color);
+		}
 		return p;
 	}
 	@Override
