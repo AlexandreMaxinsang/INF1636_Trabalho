@@ -46,6 +46,7 @@ public class Battleships extends Ship {
 				used = true;
 				return true;
 				
+				
 			}
 			
 		}
