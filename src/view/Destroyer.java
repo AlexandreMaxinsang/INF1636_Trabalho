@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-public class Destroyer implements Ship {
-	Game game;
+public class Destroyer extends Ship {
+	
 	boolean used;
 	Quad q;
 	Quad q2;
-	Color color;
+
 	Destroyer(Game game, int x,int  y, int w,int  h){
 		color = Color.RED;
 		q = new Quad(x, y, w, h,color);
@@ -23,12 +23,12 @@ public class Destroyer implements Ship {
 		q2.draw(g);
 
 	}
-
 	@Override
 	public boolean onclick(MouseEvent e) {
+		
 		if(q.onclick(e) || q2.onclick(e)){
-			if(!used){
-				game.select(this);
+			if(!used && !selecionado){
+				game.setselected(this);
 				q.color = Color.gray;
 				q2.color = Color.gray;
 				used = true;
@@ -38,6 +38,7 @@ public class Destroyer implements Ship {
 		}
 		return false;
 	}
+	
 	public Point[] requirements() {
 		Point[] p = new Point[2];
 		p[0] = new Point(0,0);

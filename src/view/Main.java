@@ -26,10 +26,9 @@ public class Main extends JFrame{
 	}
 	
 	public static void main(String[] args) {
+		
         Main jFrame = new Main();
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       
-        
         jFrame.setSize(800, 600);
         jFrame.setVisible(true);
 		jFrame.setLayout(null);

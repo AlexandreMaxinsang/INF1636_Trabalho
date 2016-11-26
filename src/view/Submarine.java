@@ -4,17 +4,18 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-public class Submarine implements Ship {
-	Game game;
+public class Submarine extends Ship {
+	
+	
 	boolean used;
-	Quad q;
-	Color color;
+	
 	Submarine(Game game, int x,int  y, int w,int  h){
 		color = Color.GREEN;
 		q = new Quad(x, y, w, h,color);
 		this.game = game;
 		used = false;
 	}
+	
 	@Override
 	public void draw(Graphics g) {
 		q.draw(g);
@@ -22,11 +23,13 @@ public class Submarine implements Ship {
 
 	@Override
 	public boolean onclick(MouseEvent e) {
+		
 		if(q.onclick(e)){
-			if(!used){
-				game.select(this);
+			if(!used && !selecionado){
+				game.setselected(this);
 				q.color = Color.gray;
 				used = true;
+				selecionado=true;
 				return true;
 			}
 			
