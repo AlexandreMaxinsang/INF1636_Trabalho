@@ -41,6 +41,7 @@ public class Hidroaviao extends Ship{
 				selecionado=true;
 				used = true;
 				return true;
+				
 			}
 			
 		}

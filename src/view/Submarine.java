@@ -31,6 +31,7 @@ public class Submarine extends Ship {
 				used = true;
 				selecionado=true;
 				return true;
+				
 			}
 			
 		}

@@ -69,6 +69,7 @@ public class Game {
 				setship(ship,p,player,a,b);
 				Ship.selecionado=false;
 				setselected(null);
+				
 			}
 			
 

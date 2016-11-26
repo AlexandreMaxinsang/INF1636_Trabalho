@@ -43,6 +43,7 @@ public class Cruzadores  extends Ship{
 				selecionado=true;
 				used = true;
 				return true;
+				
 			}
 			
 		}

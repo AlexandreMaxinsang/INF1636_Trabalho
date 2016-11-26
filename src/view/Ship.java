@@ -11,4 +11,5 @@ public abstract class Ship implements Entity {
 	
 	public abstract Point[] requirements();
 	public abstract Color getColor();
+	
 }
