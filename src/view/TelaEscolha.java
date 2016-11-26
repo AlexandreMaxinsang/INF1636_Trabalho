@@ -7,19 +7,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class TelaEscolha extends JPanel implements MouseListener {
 	
 	ArrayList<Entity> objs;
+	
+	JButton b1= new JButton("Finalizar");
+	Game game = new Game(this);
 	public TelaEscolha() {
         setBackground(Color.WHITE);
         objs = new ArrayList<Entity>();
-        Game game = new Game(this);
+      
         
-           
-  
         objs.add(new Submarine(game,10,10,20,20));
         objs.add(new Submarine(game,40,10,20,20));
         objs.add(new Submarine(game,70,10,20,20));
@@ -42,13 +44,24 @@ public class TelaEscolha extends JPanel implements MouseListener {
         objs.add(new Hidroaviao(game,350,130,20,20));
         
         objs.add(new Tabuleiro(game,15,15,450,200,20));
-
+        
+        setLayout(null);
+        b1.setBounds(300,500,100,30);
+        this.add(b1);
+        b1.setEnabled(false);
+        
         addMouseListener(this);
     }
 	public void update() {
+		
 		System.out.println("update");
         for(int i=0;i<objs.size();i++){
         	objs.get(i).update();
+        }
+        
+        if(game.getnumeroShip()==15){
+        	  b1.setEnabled(true);
+        	
         }
     }
     

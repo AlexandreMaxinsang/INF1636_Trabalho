@@ -48,11 +48,11 @@ public class Hidroaviao extends Ship{
 	}
 	
 	public Point[] requirements() {
-		Point[] p = new Point[3];
-		p[0] = new Point(0,0);
-		p[1] = new Point(-1,+1);
-		p[2] = new Point(+1,+1);
-		
+		Point[] p = new Point[4];
+		p[0] = new Point(0,0,super.color);
+		p[1] = new Point(-1,+1,super.color);
+		p[2] = new Point(+1,+1,super.color);
+		p[3] = new Point(0,+1,Color.BLUE);
 		return p;
 	}
 	@Override

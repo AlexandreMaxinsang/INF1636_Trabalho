@@ -38,7 +38,7 @@ public class Cell extends Quad implements Entity {
 	public void update(){
 		Ship s = game.getcell(player,i,j);
 		if(s != null){
-			Color c = s.getColor();
+			Color c =game.getcolor(player, i, j);
 			super.color = c;
 		}
 		else{

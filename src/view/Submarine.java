@@ -38,7 +38,7 @@ public class Submarine extends Ship {
 	}
 	public Point[] requirements() {
 		Point[] p = new Point[1];
-		p[0] = new Point(0,0);
+		p[0] = new Point(0,0,super.color);
 		return p;
 	}
 	@Override

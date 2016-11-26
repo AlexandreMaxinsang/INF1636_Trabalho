@@ -42,8 +42,8 @@ public class Destroyer extends Ship {
 	
 	public Point[] requirements() {
 		Point[] p = new Point[2];
-		p[0] = new Point(0,0);
-		p[1] = new Point(+1,0);
+		p[0] = new Point(0,0,super.color);
+		p[1] = new Point(+1,0,super.color);
 		return p;
 	}
 	@Override

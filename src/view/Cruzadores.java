@@ -51,10 +51,10 @@ public class Cruzadores  extends Ship{
 	
 	public Point[] requirements() {
 		Point[] p = new Point[4];
-		p[0] = new Point(0,0);
-		p[1] = new Point(+1,0);
-		p[2] = new Point(+2,0);
-		p[3] = new Point(+3,0);
+		p[0] = new Point(0,0,super.color);
+		p[1] = new Point(+1,0,super.color);
+		p[2] = new Point(+2,0,super.color);
+		p[3] = new Point(+3,0,super.color);
 		return p;
 	}
 	@Override

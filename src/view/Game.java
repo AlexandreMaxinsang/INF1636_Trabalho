@@ -1,32 +1,40 @@
 package view;
 
+import java.awt.Color;
+
 public class Game {
 	
+	private static int numeroShip=0;
 	Ship selected;
 	Ship Board1[][];
 	Ship Board2[][];
+	Color cellColor1[][];
+	Color cellColor2[][];
+	
 	TelaEscolha tela;
 	
 	Game(TelaEscolha tela){
 		Board1 = new Ship[15][15];
 		Board2 = new Ship[15][15];
+		cellColor1=new Color [15][15];
+		cellColor2=new Color [15][15];
 		this.tela= tela;
 	}
 	boolean isWater(int player,int i,int j){
 		//if i,j inside board talvez com trycatch
-		if(player == 1 && Board1[i][j]!=null){
+		if(player == 1 && Board1[i][j]!=null)
 			return false;
-		}
-		if(player == 2 && Board2[i][j]!=null){
+		
+		if(player == 2 && Board2[i][j]!=null)
 			return false;
-		}
+		
 		return true;
 	}
 	
 	void setselected(Ship q){
-		
-		selected = q;
 		System.out.println("selecionou");
+		selected = q;
+		
 	}
 	
 	Ship getselected(){
@@ -57,15 +65,23 @@ public class Game {
 			System.out.println(ok);
 
 			if(ok){
-				
+				numeroShip++;
 				setship(ship,p,player,a,b);
 				Ship.selecionado=false;
 				setselected(null);
 			}
+			
+
 		};
 		
 	}
 	
+	
+	public int getnumeroShip(){
+		
+		return numeroShip;
+		
+	}
 	
 	public void setship(Ship ship,Point[] p,int player, int i, int j) {
 	
@@ -75,6 +91,7 @@ public class Game {
 			
 			for(int k=0;k<p.length;k++){
 				Board1[i+p[k].x][j+p[k].y] = ship;
+				cellColor1[i+p[k].x][j+p[k].y]=p[k].color;
 			}
 		}
 		if(player == 2){
@@ -92,4 +109,14 @@ public class Game {
 		}
 		return null;
 	}
+	public Color getcolor(int player, int i, int j) {
+		if(player == 1){
+			return cellColor1[i][j];
+		}
+		if(player == 2){
+			return cellColor2[i][j];
+		}
+		return null;
+	}
+	
 }
