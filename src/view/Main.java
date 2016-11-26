@@ -7,12 +7,13 @@ import javax.swing.JFrame;
 
 public class Main extends JFrame{
 
+
+	TelaEscolha telaInicialPlayer1 = new TelaEscolha("Player1");
+	TelaEscolha telaInicialPlayer2 = new TelaEscolha("Player2");
 	
 	Main(){
 		
-		TelaEscolha tela = new TelaEscolha();
-        this.add(tela);
-        
+        this.add(telaInicialPlayer1);
 	}
 	
 	public static void main(String[] args) {
@@ -22,6 +23,7 @@ public class Main extends JFrame{
         jFrame.setSize(800, 600);
         jFrame.setVisible(true);
 		jFrame.setLayout(null);
+		
 
     }
 

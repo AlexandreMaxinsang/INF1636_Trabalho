@@ -9,19 +9,21 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class TelaEscolha extends JPanel implements MouseListener {
 	
 	ArrayList<Entity> objs;
-	
 	JButton b1= new JButton("Finalizar");
+	
 	Game game = new Game(this);
-	public TelaEscolha() {
+	
+	public TelaEscolha(String name) {
+		
         setBackground(Color.WHITE);
         objs = new ArrayList<Entity>();
       
-        
         objs.add(new Submarine(game,10,10,20,20));
         objs.add(new Submarine(game,40,10,20,20));
         objs.add(new Submarine(game,70,10,20,20));
@@ -47,8 +49,13 @@ public class TelaEscolha extends JPanel implements MouseListener {
         
         setLayout(null);
         b1.setBounds(300,500,100,30);
-        this.add(b1);
         b1.setEnabled(false);
+        b1.addActionListener(new Tratadorbutao(this));
+        this.add(b1);
+
+        JLabel l=new JLabel(name);
+        l.setBounds(350,10,100,30);
+        this.add(l);
         
         addMouseListener(this);
     }
@@ -58,11 +65,11 @@ public class TelaEscolha extends JPanel implements MouseListener {
         for(int i=0;i<objs.size();i++){
         	objs.get(i).update();
         }
-        
         if(game.getnumeroShip()==15){
-        	  b1.setEnabled(true);
-        	
-        }
+      	  b1.setEnabled(true);
+      	
+      }
+       
     }
     
     public void paintComponent(Graphics g) {
