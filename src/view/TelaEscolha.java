@@ -19,7 +19,7 @@ public class TelaEscolha extends JPanel implements MouseListener {
 	JButton b1= new JButton("Finalizar");
 	
 	Game game = new Game(this);
-	
+	Tabuleiro board;
 	public TelaEscolha(String name) {
 		
         setBackground(Color.WHITE);
@@ -45,8 +45,8 @@ public class TelaEscolha extends JPanel implements MouseListener {
         objs.add(new Hidroaviao(game,170,160,20,20,Orientacao.Leste));
         objs.add(new Hidroaviao(game,250,160,20,20,Orientacao.Leste));
         objs.add(new Hidroaviao(game,330,160,20,20,Orientacao.Leste));
-        
-        objs.add(new Tabuleiro(game,15,15,450,200,20));
+        board = new Tabuleiro(game,15,15,450,200,20);
+        objs.add(board);
         
         setLayout(null);
         b1.setBounds(300,500,100,30);
@@ -60,6 +60,9 @@ public class TelaEscolha extends JPanel implements MouseListener {
         
         addMouseListener(this);
     }
+	public Tabuleiro getBoard(){
+		return board;
+	}
 	public void update() {
 		
 		System.out.println("update");

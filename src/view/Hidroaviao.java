@@ -51,24 +51,31 @@ public class Hidroaviao extends Ship{
 	
 	public Point[] requirements() {
 		Point[] p = new Point[3];
-		p[0] = new Point(0,0,super.color);
-		if(orientacao==Orientacao.Norte){
-			p[1] = new Point(-1,-1,super.color);
-			p[2] = new Point(+1,-1,super.color);
+		if(used == false){
+			p[0] = new Point(0,0);
+			if(orientacao==Orientacao.Norte){
+				p[1] = new Point(-1,-1);
+				p[2] = new Point(+1,-1);
+				
+			}
+			else if(orientacao==Orientacao.Leste){
+				p[1] = new Point(+1,-1);
+				p[2] = new Point(+1,+1);
 			
+			}
+			else if(orientacao==Orientacao.Sul){
+				p[1] = new Point(-1,+1);
+				p[2] = new Point(+1,+1);
+			}
+			else if(orientacao==Orientacao.Oeste){
+				p[1] = new Point(-1,+1);
+				p[2] = new Point(-1,-1);
+			}
 		}
-		else if(orientacao==Orientacao.Leste){
-			p[1] = new Point(+1,-1,super.color);
-			p[2] = new Point(+1,+1,super.color);
-		
-		}
-		else if(orientacao==Orientacao.Sul){
-			p[1] = new Point(-1,+1,super.color);
-			p[2] = new Point(+1,+1,super.color);
-		}
-		else if(orientacao==Orientacao.Oeste){
-			p[1] = new Point(-1,+1,super.color);
-			p[2] = new Point(-1,-1,super.color);
+		else{
+			p[0] = game.coord2index(q1.getCoord());
+			p[1] = game.coord2index(q2.getCoord());
+			p[2] = game.coord2index(q3.getCoord());
 		}
 		return p;
 	}

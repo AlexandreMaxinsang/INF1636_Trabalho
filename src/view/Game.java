@@ -20,14 +20,16 @@ public class Game {
 		cellColor2=new Color [15][15];
 		this.tela= tela;
 	}
+	Ship[][] getBoard(int player){
+		if(player ==1) return Board1;
+		if(player ==2) return Board2;
+		return null;
+	}
 	boolean isWater(int player,int i,int j){
-		//if i,j inside board talvez com trycatch
-		if(player == 1 && Board1[i][j]!=null)
-			return false;
-		
-		if(player == 2 && Board2[i][j]!=null)
-			return false;
-		
+		Ship[][] b = getBoard(player);
+		if(b!=null && b[i][j]!=null){
+				return false;
+		}
 		return true;
 	}
 	
@@ -41,39 +43,57 @@ public class Game {
 		return selected;
 	}
 	
-	public void uptade(int player,int a ,int b){
+	public void update(int player,int i ,int j){
 		
 		Ship ship = getselected();
 		if(ship!=null){
 			
 			System.out.println("ship");
-			Point[] p = ((Ship)ship).requirements();
+			Point[] req = ((Ship)ship).requirements();
 			boolean ok = true;
 			
-			for(int i=0;i<p.length;i++){
-				int px=a+p[i].x;
-				int py=b+p[i].y;
+			for(int tmp=0;tmp<req.length;tmp++){
+				System.out.println(tmp);
+				System.out.println(req);
+				System.out.println(req[tmp]);
+				System.out.println(req[tmp].x);
+
+				int px=req[tmp].x;
+				int py=req[tmp].y;
 				if(px>=0 && px<15 && py>=0 && py<15)
-				{	if(!isWater(player,px,py)){
+				{	
+					if(!isWater(player,px,py)){
 						ok = false;
 					}
+					//checar vizinhos
 				}
-				else
+				else{
 					ok=false;
+				}
 			}
 			
 			System.out.println(ok);
 
 			if(ok){
 				numeroShip++;
-				setship(ship,p,player,a,b);
+				setship(ship,player,i,j);
 				Ship.selecionado=false;
 				setselected(null);
 				
 			}
 			
 
-		};
+		}
+		else{
+			if(!isWater(player,i,j)){
+				setship(null,player,i,j);
+				//pego o ship de i,j
+				//vai no ship e poe used como false
+				//board[i][j] e botar null
+				//p cada req do ship, muda cor p agua
+
+			}
+		}
 		
 	}
 	
@@ -95,39 +115,36 @@ public class Game {
 		return numeroShip;
 		
 	}
-	
-	public void setship(Ship ship,Point[] p,int player, int i, int j) {
-	
-		System.out.println("set");
-		
-		if(player == 1){
-			
+	public Point coord2index(Point p){
+		return tela.getBoard().coord2index(p);
+	}
+	public void setship(Ship ship,int player, int i, int j) {
+		Ship[][] b = getBoard(player);
+
+		if(ship!=null){
+			Point[] p = ship.requirements();
 			for(int k=0;k<p.length;k++){
-				Board1[i+p[k].x][j+p[k].y] = ship;
-				cellColor1[i+p[k].x][j+p[k].y]=p[k].color;
+				b[i+p[k].x][j+p[k].y] = ship;
 			}
 		}
-		if(player == 2){
-			Board2[i][j] = ship;
+		else{
+			Ship s = getcell(player,i,j);
+			if(s!=null){
+				Point[] p = s.requirements();
+				for(int k=0;k<p.length;k++){
+					b[i+p[k].x][j+p[k].y] = null;
+				}
+			}
+			
 		}
 		tela.update();
+
 	}
 	
 	public Ship getcell(int player, int i, int j) {
-		if(player == 1){
-			return Board1[i][j];
-		}
-		if(player == 2){
-			return Board2[i][j];
-		}
-		return null;
-	}
-	public Color getcolor(int player, int i, int j) {
-		if(player == 1){
-			return cellColor1[i][j];
-		}
-		if(player == 2){
-			return cellColor2[i][j];
+		Ship[][] b = getBoard(player);
+		if(b!=null){
+				return b[i][j];
 		}
 		return null;
 	}
