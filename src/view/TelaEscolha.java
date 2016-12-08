@@ -17,12 +17,15 @@ public class TelaEscolha extends JPanel implements MouseListener {
 	
 	ArrayList<Entity> objs;
 	JButton b1= new JButton("Finalizar");
-	
+	Tabuleiro tabuleiro;
 	Game game = new Game(this);
 	
 	public TelaEscolha(String name) {
 		
         setBackground(Color.WHITE);
+        
+        tabuleiro=new Tabuleiro(game,15,15,450,200,20);
+        
         objs = new ArrayList<Entity>();
       
         objs.add(new Submarine(game,10,10,20,20,Orientacao.Leste));
@@ -46,7 +49,6 @@ public class TelaEscolha extends JPanel implements MouseListener {
         objs.add(new Hidroaviao(game,250,160,20,20,Orientacao.Leste));
         objs.add(new Hidroaviao(game,330,160,20,20,Orientacao.Leste));
         
-        objs.add(new Tabuleiro(game,15,15,450,200,20));
         
         setLayout(null);
         b1.setBounds(300,500,100,30);
@@ -64,12 +66,14 @@ public class TelaEscolha extends JPanel implements MouseListener {
 		
 		System.out.println("update");
         for(int i=0;i<objs.size();i++){
-        	objs.get(i).update();
+        	objs.get(i).update(); //nao serve para nada 
         }
-        if(game.getnumeroShip()==15){
+        tabuleiro.update();
+        if(game.getnumeroShip()==15)
       	  b1.setEnabled(true);
-      	
-      }
+      	else
+      		 b1.setEnabled(false);
+      
        
     }
     
@@ -77,7 +81,9 @@ public class TelaEscolha extends JPanel implements MouseListener {
         super.paintComponent(g);
         for(int i=0;i<objs.size();i++){
         	objs.get(i).draw(g);
+     
         }
+        tabuleiro.draw(g);
     }
 
 
@@ -109,11 +115,18 @@ public class TelaEscolha extends JPanel implements MouseListener {
 		}
 		if(SwingUtilities.isLeftMouseButton(e))
 		{
+			if(tabuleiro.onclick(e)){
+				
+				 game.uptade(1, tabuleiro.posicaocell().x, tabuleiro.posicaocell().y);
+				 repaint();
+				 
+			 }
 			 for(int i=0;i<objs.size();i++){
-				 if (objs.get(i).onclick(e)){
+				 if (objs.get(i).onclick(e) ){
 						repaint();
 					}
 		     }
+			
 		}
 	}
 

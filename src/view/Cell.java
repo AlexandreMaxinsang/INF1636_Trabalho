@@ -28,17 +28,18 @@ public class Cell extends Quad implements Entity {
 	public boolean onclick(MouseEvent e) {
 		
 		if(super.onclick(e)){
-			game.uptade(player, i, j);
+			//game.uptade(player, i, j); nao ser para nada
 			return true;
 		}
 		
 		return false;
 	}
 	
+	@Override
 	public void update(){
 		Ship s = game.getcell(player,i,j);
 		if(s != null){
-			Color c =game.getcolor(player, i, j);
+			Color c =s.color;
 			super.color = c;
 		}
 		else{
@@ -46,4 +47,5 @@ public class Cell extends Quad implements Entity {
 		}
 		
 	}
+
 }

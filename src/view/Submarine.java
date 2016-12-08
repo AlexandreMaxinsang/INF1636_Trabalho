@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 public class Submarine extends Ship {
 	
 	
-	boolean used;
 	
 	Submarine(Game game, int x,int  y, int w,int  h,Orientacao orientacao){
 		color = Color.GREEN;
@@ -27,7 +26,7 @@ public class Submarine extends Ship {
 		if(q.onclick(e)){
 			if(!used && !selecionado){
 				game.setselected(this);
-				q.color = Color.gray;
+				mudarcor(Color.gray);
 				used = true;
 				selecionado=true;
 				return true;
@@ -39,7 +38,7 @@ public class Submarine extends Ship {
 	}
 	public Point[] requirements() {
 		Point[] p = new Point[1];
-		p[0] = new Point(0,0,super.color);
+		p[0] = new Point(0,0);
 		return p;
 	}
 	@Override
@@ -51,6 +50,13 @@ public class Submarine extends Ship {
 	public Color getColor() {
 		// TODO Auto-generated method stub
 		return color;
+	}
+
+	@Override
+	public void mudarcor(Color color) {
+		// TODO Auto-generated method stub
+		q.color = color;
+		
 	}
 	
 	

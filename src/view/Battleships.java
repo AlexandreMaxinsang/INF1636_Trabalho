@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class Battleships extends Ship {
-	boolean used;
+	
 	Quad q1;
 	Quad q2;
 	Quad q3;
@@ -37,11 +37,7 @@ public class Battleships extends Ship {
 		if(q1.onclick(e) || q2.onclick(e)||q3.onclick(e) || q4.onclick(e)||q5.onclick(e)){
 			if(!used && !selecionado){
 				game.setselected(this);
-				q1.color = Color.gray;
-				q2.color = Color.gray;
-				q3.color = Color.gray;
-				q4.color = Color.gray;
-				q5.color = Color.gray;
+				mudarcor(Color.gray);
 				
 				selecionado=true;
 				used = true;
@@ -56,31 +52,31 @@ public class Battleships extends Ship {
 	
 	public Point[] requirements() {
 		Point[] p = new Point[5];
-		p[0] = new Point(0,0,super.color);
+		p[0] = new Point(0,0);
 		
 		if(orientacao==Orientacao.Norte){
-			p[1] = new Point(0,-1,super.color);
-			p[2] = new Point(0,-2,super.color);
-			p[3] = new Point(0,-3,super.color);
-			p[4] = new Point(0,-4,super.color);
+			p[1] = new Point(0,-1);
+			p[2] = new Point(0,-2);
+			p[3] = new Point(0,-3);
+			p[4] = new Point(0,-4);
 		}
 		else if(orientacao==Orientacao.Leste){
-			p[1] = new Point(+1,0,super.color);
-			p[2] = new Point(+2,0,super.color);
-			p[3] = new Point(+3,0,super.color);
-			p[4] = new Point(+4,0,super.color);
+			p[1] = new Point(+1,0);
+			p[2] = new Point(+2,0);
+			p[3] = new Point(+3,0);
+			p[4] = new Point(+4,0);
 		}
 		else if(orientacao==Orientacao.Sul){
-			p[1] = new Point(0,+1,super.color);
-			p[2] = new Point(0,+2,super.color);
-			p[3] = new Point(0,+3,super.color);
-			p[4] = new Point(0,+4,super.color);
+			p[1] = new Point(0,+1);
+			p[2] = new Point(0,+2);
+			p[3] = new Point(0,+3);
+			p[4] = new Point(0,+4);
 		}
 		else if(orientacao==Orientacao.Oeste){
-			p[1] = new Point(-1,0,super.color);
-			p[2] = new Point(-2,0,super.color);
-			p[3] = new Point(-3,0,super.color);
-			p[4] = new Point(-4,0,super.color);
+			p[1] = new Point(-1,0);
+			p[2] = new Point(-2,0);
+			p[3] = new Point(-3,0);
+			p[4] = new Point(-4,0);
 		}
 		return p;
 	}
@@ -93,6 +89,16 @@ public class Battleships extends Ship {
 	public Color getColor() {
 		// TODO Auto-generated method stub
 		return color;
+	}
+	@Override
+	public void mudarcor(Color color) {
+		q1.color = color;
+		q2.color = color;
+		q3.color = color;
+		q4.color = color;
+		q5.color = color;
+		
+		
 	}
 
 }

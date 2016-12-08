@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 
 public class Game {
 	
@@ -8,16 +7,14 @@ public class Game {
 	Ship selected;
 	Ship Board1[][];
 	Ship Board2[][];
-	Color cellColor1[][];
-	Color cellColor2[][];
+
 	
 	TelaEscolha tela;
 	
 	Game(TelaEscolha tela){
 		Board1 = new Ship[15][15];
 		Board2 = new Ship[15][15];
-		cellColor1=new Color [15][15];
-		cellColor2=new Color [15][15];
+		
 		this.tela= tela;
 	}
 	boolean isWater(int player,int i,int j){
@@ -31,30 +28,24 @@ public class Game {
 		return true;
 	}
 	
-	void setselected(Ship q){
-		System.out.println("selecionou");
-		selected = q;
-		
-	}
 	
-	Ship getselected(){
-		return selected;
-	}
-	
-	public void uptade(int player,int a ,int b){
+	public void uptade(int player,int posx ,int posy){
 		
 		Ship ship = getselected();
+		
 		if(ship!=null){
 			
 			System.out.println("ship");
+			
 			Point[] p = ((Ship)ship).requirements();
 			boolean ok = true;
 			
 			for(int i=0;i<p.length;i++){
-				int px=a+p[i].x;
-				int py=b+p[i].y;
+				int px=posx+p[i].x;
+				int py=posy+p[i].y;
 				if(px>=0 && px<15 && py>=0 && py<15)
-				{	if(!isWater(player,px,py)){
+				{	
+					if(!isWater(player,px,py)){
 						ok = false;
 					}
 				}
@@ -66,14 +57,36 @@ public class Game {
 
 			if(ok){
 				numeroShip++;
-				setship(ship,p,player,a,b);
+				setship(ship,player,posx,posy);
 				Ship.selecionado=false;
 				setselected(null);
 				
 			}
-			
+		}
+		else{
+			Ship aux=Board1[posx][posy];
+			if(aux!=null){
+				aux.used=false;
+				for(int i=0;i<15;i++)
+					for(int j=0;j<15;j++)
+						if(aux==Board1[i][j]){
+							
+							Board1[i][j].mudarcor(Board1[i][j].getColor());
+							
+							Board1[i][j]=null;
+							
+						}
+				   numeroShip--;
 
-		};
+					tela.update();
+					
+			}
+					
+			
+			
+			
+			
+		}
 		
 	}
 	
@@ -96,15 +109,26 @@ public class Game {
 		
 	}
 	
-	public void setship(Ship ship,Point[] p,int player, int i, int j) {
+	void setselected(Ship q){
+		System.out.println("selecionou");
+		selected = q;
+		
+	}
+	
+	Ship getselected(){
+		return selected;
+	}
+	
+	
+	
+	public void setship(Ship ship,int player, int i, int j) {
 	
 		System.out.println("set");
-		
+		Point[] p=ship.requirements();
 		if(player == 1){
 			
 			for(int k=0;k<p.length;k++){
 				Board1[i+p[k].x][j+p[k].y] = ship;
-				cellColor1[i+p[k].x][j+p[k].y]=p[k].color;
 			}
 		}
 		if(player == 2){
@@ -122,14 +146,5 @@ public class Game {
 		}
 		return null;
 	}
-	public Color getcolor(int player, int i, int j) {
-		if(player == 1){
-			return cellColor1[i][j];
-		}
-		if(player == 2){
-			return cellColor2[i][j];
-		}
-		return null;
-	}
-	
+
 }

@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 
 public class Destroyer extends Ship {
 	
-	boolean used;
+	
 	Quad q1;
 	Quad q2;
 	
@@ -30,8 +30,7 @@ public class Destroyer extends Ship {
 		if(q1.onclick(e) || q2.onclick(e)){
 			if(!used && !selecionado){
 				game.setselected(this);
-				q1.color = Color.gray;
-				q2.color = Color.gray;
+				 mudarcor(Color.gray);
 				selecionado=true;
 				used = true;
 				return true;
@@ -43,15 +42,15 @@ public class Destroyer extends Ship {
 	
 	public Point[] requirements() {
 		Point[] p = new Point[2];
-		p[0] = new Point(0,0,super.color);
+		p[0] = new Point(0,0);
 		if(orientacao==Orientacao.Norte)
-			p[1] = new Point(0,-1,super.color);
+			p[1] = new Point(0,-1);
 		else if(orientacao==Orientacao.Leste)
-			p[1] = new Point(+1,0,super.color);
+			p[1] = new Point(+1,0);
 		else if(orientacao==Orientacao.Sul)
-			p[1] = new Point(0,+1,super.color);
+			p[1] = new Point(0,+1);
 		else if(orientacao==Orientacao.Oeste)
-			p[1] = new Point(-1,0,super.color);
+			p[1] = new Point(-1,0);
 		
 		return p;
 	}
@@ -64,6 +63,12 @@ public class Destroyer extends Ship {
 	public Color getColor() {
 		// TODO Auto-generated method stub
 		return color;
+	}
+	@Override
+	public void mudarcor(Color color) {
+		q1.color = color;
+		q2.color = color;
+		
 	}
 
 }

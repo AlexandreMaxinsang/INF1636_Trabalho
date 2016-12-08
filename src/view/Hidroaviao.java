@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 
 public class Hidroaviao extends Ship{
 
-	boolean used;
 	Quad q1;
 	Quad q2;
 	Quad q3;
@@ -23,6 +22,13 @@ public class Hidroaviao extends Ship{
 		this.game = game;
 		used = false;
 	}
+	
+	public void mudarcor(Color color){
+		q1.color = color;
+		q2.color = color;
+		q3.color = color;
+	}
+	
 	@Override
 	public void draw(Graphics g) {
 		q1.draw(g);
@@ -35,10 +41,8 @@ public class Hidroaviao extends Ship{
 		if(q1.onclick(e) || q2.onclick(e)||q3.onclick(e)){
 			if(!used && !selecionado){
 				game.setselected(this);
-				q1.color = Color.gray;
-				q2.color = Color.gray;
-				q3.color = Color.gray;
-				
+				mudarcor(Color.gray);
+
 				selecionado=true;
 				used = true;
 				return true;
@@ -51,24 +55,24 @@ public class Hidroaviao extends Ship{
 	
 	public Point[] requirements() {
 		Point[] p = new Point[3];
-		p[0] = new Point(0,0,super.color);
+		p[0] = new Point(0,0);
 		if(orientacao==Orientacao.Norte){
-			p[1] = new Point(-1,-1,super.color);
-			p[2] = new Point(+1,-1,super.color);
+			p[1] = new Point(-1,-1);
+			p[2] = new Point(+1,-1);
 			
 		}
 		else if(orientacao==Orientacao.Leste){
-			p[1] = new Point(+1,-1,super.color);
-			p[2] = new Point(+1,+1,super.color);
+			p[1] = new Point(+1,-1);
+			p[2] = new Point(+1,+1);
 		
 		}
 		else if(orientacao==Orientacao.Sul){
-			p[1] = new Point(-1,+1,super.color);
-			p[2] = new Point(+1,+1,super.color);
+			p[1] = new Point(-1,+1);
+			p[2] = new Point(+1,+1);
 		}
 		else if(orientacao==Orientacao.Oeste){
-			p[1] = new Point(-1,+1,super.color);
-			p[2] = new Point(-1,-1,super.color);
+			p[1] = new Point(-1,+1);
+			p[2] = new Point(-1,-1);
 		}
 		return p;
 	}
@@ -82,5 +86,8 @@ public class Hidroaviao extends Ship{
 		// TODO Auto-generated method stub
 		return color;
 	}
+	
+	
+	
 
 }
