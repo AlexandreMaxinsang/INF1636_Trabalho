@@ -48,12 +48,7 @@ public class TelaEscolha extends JPanel implements MouseListener {
         objs.add(new Hidroaviao(game,170,160,20,20,Orientacao.Leste));
         objs.add(new Hidroaviao(game,250,160,20,20,Orientacao.Leste));
         objs.add(new Hidroaviao(game,330,160,20,20,Orientacao.Leste));
-<<<<<<< HEAD
-        
-=======
-        board = new Tabuleiro(game,15,15,450,200,20);
-        objs.add(board);
->>>>>>> origin/master
+
         
         setLayout(null);
         b1.setBounds(300,500,100,30);
